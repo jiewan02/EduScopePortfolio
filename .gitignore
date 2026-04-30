@@ -9,3 +9,6 @@ logs/*.jsonl
 *.egg-info/
 dist/
 build/
+.env
+*.env
+runs/
