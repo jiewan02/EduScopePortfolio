@@ -1,0 +1,12 @@
+# Web server
+fastapi>=0.111.0
+uvicorn[standard]>=0.29.0
+python-multipart>=0.0.9
+
+# CV / ML (match your existing environment)
+opencv-python>=4.9.0
+numpy>=1.24.0
+mediapipe>=0.10.0
+ultralytics>=8.2.0
+torch>=2.1.0
+scipy>=1.11.0

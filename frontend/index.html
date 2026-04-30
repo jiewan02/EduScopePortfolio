@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EduScope – Classroom Engagement Monitor</title>
+  <link rel="stylesheet" href="/static/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <span class="logo-icon">👁️</span>
+    <span class="logo-text">EduScope</span>
+    <span class="logo-sub">Classroom Engagement Monitor</span>
+  </div>
+  <div class="header-right">
+    <span id="status-dot" class="dot dot-off"></span>
+    <span id="status-label">Disconnected</span>
+    <button id="btn-start" class="btn btn-green" onclick="startSession()">▶ Start Camera</button>
+    <button id="btn-stop"  class="btn btn-red"   onclick="stopSession()"  disabled>■ Stop</button>
+    <button id="btn-reset" class="btn btn-gray"  onclick="resetSession()" disabled>↺ Reset</button>
+  </div>
+</header>
+
+<main class="grid">
+
+  <!-- Live feed + overlay -->
+  <section class="panel video-panel">
+    <div class="panel-title">Live Feed</div>
+    <div class="video-wrapper">
+      <video  id="webcam"          autoplay playsinline muted></video>
+      <canvas id="overlay-canvas"></canvas>
+      <div    id="no-signal" class="no-signal">
+        <div class="no-signal-icon">📷</div>
+        <div>Start camera to begin monitoring</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Right column -->
+  <aside class="right-col">
+
+    <section class="panel stats-panel">
+      <div class="panel-title">Session Stats</div>
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div class="stat-value" id="stat-people">0</div>
+          <div class="stat-label">People</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-value accent" id="stat-avg-eng">—</div>
+          <div class="stat-label">Avg Engagement</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-value" id="stat-fps">—</div>
+          <div class="stat-label">Proc. FPS</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-value" id="stat-time">00:00</div>
+          <div class="stat-label">Session Time</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel persons-panel">
+      <div class="panel-title">Detected Persons</div>
+      <div id="persons-container" class="persons-container">
+        <div class="empty-msg">No persons detected yet.</div>
+      </div>
+    </section>
+
+  </aside>
+
+  <!-- Timeline chart -->
+  <section class="panel chart-panel">
+    <div class="panel-title">
+      Engagement Timeline
+      <span class="chart-legend" id="chart-legend"></span>
+    </div>
+    <canvas id="engagement-chart"></canvas>
+  </section>
+
+</main>
+
+<script src="/static/app.js"></script>
+</body>
+</html>
