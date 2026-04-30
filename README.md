@@ -16,7 +16,7 @@ A real-time classroom engagement monitoring system using your webcam. The app de
 ## Project Structure
 
 ```
-eduscope/
+EduScopePortfolio/
 ├── backend/          # FastAPI server + ML inference engine
 │   ├── __init__.py
 │   ├── server.py
@@ -48,24 +48,31 @@ eduscope/
 
 Open a terminal and run:
 
+**macOS / Linux:**
 ```bash
 python3 --version
+```
+
+**Windows:**
+```cmd
+python --version
 ```
 
 You need **Python 3.10, 3.11, or 3.12**. If you don't have Python installed, download it from [python.org](https://www.python.org/downloads/).
 
 ---
 
-### Step 2 — Navigate to the project folder
+### Step 2 — Clone the repository
 
 ```bash
-cd /path/to/eduscope
+git clone https://github.com/jiewan02/EduScopePortfolio.git
+cd EduScopePortfolio
 ```
 
-Replace `/path/to/eduscope` with the actual path where you placed this folder, for example:
+If you downloaded a ZIP file instead, unzip it and navigate into the folder:
 
 ```bash
-cd ~/ai_projects/eduscope
+cd /path/to/EduScopePortfolio
 ```
 
 ---
@@ -74,8 +81,14 @@ cd ~/ai_projects/eduscope
 
 A virtual environment keeps the project's dependencies isolated from your system Python.
 
+**macOS / Linux:**
 ```bash
 python3 -m venv venv
+```
+
+**Windows:**
+```cmd
+python -m venv venv
 ```
 
 This creates a `venv/` folder inside the project directory.
@@ -101,13 +114,21 @@ venv\Scripts\Activate.ps1
 
 After activation, your terminal prompt will show `(venv)` at the start.
 
-> **Important:** Always activate the virtual environment before running the app.
+> **macOS / Linux users running `./run.sh`:** The script activates the virtual environment automatically — you do not need to activate it manually before using the run script.
+>
+> **Windows users or anyone running uvicorn directly (Step 6):** You must activate the virtual environment each time you open a new terminal before running the app.
 
 ---
 
 ### Step 5 — Install dependencies
 
-With the virtual environment active, install all required packages:
+First, upgrade pip to avoid installation issues with complex packages:
+
+```bash
+pip install --upgrade pip
+```
+
+Then install all required packages:
 
 ```bash
 pip install -r requirements.txt
@@ -135,9 +156,12 @@ This will install FastAPI, Uvicorn, OpenCV, MediaPipe, PyTorch, SciPy, and Ultra
 ./run.sh
 ```
 
-> The script automatically activates the `venv/` virtual environment before starting the server, so you do **not** need to activate it manually first.
+> The script automatically activates the `venv/` virtual environment — no manual activation needed.
 
 **Any platform (using uvicorn directly):**
+
+> Make sure the virtual environment is activated first (Step 4).
+
 ```bash
 uvicorn backend.server:app --host 0.0.0.0 --port 8000 --reload
 ```
@@ -199,13 +223,20 @@ http://localhost:8000
 - In Chrome: click the camera icon in the address bar → Allow.
 - In Safari: System Settings → Privacy & Security → Camera → allow your browser.
 
+**`Permission denied` when running `./run.sh`**
+- Make the script executable and try again:
+  ```bash
+  chmod +x run.sh
+  ./run.sh
+  ```
+
 **Server starts but models fail to load / FileNotFoundError**
 - Confirm all 5 `.pt` files are present in the `models/` folder.
 - Run `ls models/` (or `dir models\` on Windows) and verify the filenames match exactly.
 
 **`ModuleNotFoundError: No module named 'ultralytics'` (or any package)**
 - Make sure the virtual environment is activated (you should see `(venv)` in your prompt).
-- Re-run `pip install -r requirements.txt`.
+- Re-run `pip install --upgrade pip && pip install -r requirements.txt`.
 
 **Dashboard shows "Loading models…" indefinitely**
 - Check the terminal for error messages. Common causes: missing model file, wrong Python version, or a package installation problem.

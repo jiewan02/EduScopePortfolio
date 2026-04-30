@@ -3,6 +3,17 @@
 set -e
 cd "$(dirname "$0")"
 
+if [ ! -f "venv/bin/activate" ]; then
+    echo ""
+    echo "ERROR: Virtual environment not found. Complete the setup steps first:"
+    echo "  python3 -m venv venv"
+    echo "  source venv/bin/activate"
+    echo "  pip install --upgrade pip"
+    echo "  pip install -r requirements.txt"
+    echo ""
+    exit 1
+fi
+
 source venv/bin/activate
 
 echo "Starting EduScope server…"
